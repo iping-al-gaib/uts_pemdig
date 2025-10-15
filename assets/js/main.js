@@ -27,8 +27,10 @@
 	// Public API to load header and footer
 	window.NafaraUI = {
 		loadShell: function() {
-			includeComponent('#app-header', '/nafara/components/header.html', function(){ initMobileNav(); });
-			includeComponent('#app-footer', '/nafara/components/footer.html', function(){ setYear(); });
+			var isInSubdir = /\/katalog\//.test(window.location.pathname);
+			var base = isInSubdir ? '..' : '.';
+			includeComponent('#app-header', base + '/components/header.html', function(){ initMobileNav(); });
+			includeComponent('#app-footer', base + '/components/footer.html', function(){ setYear(); });
 		},
 		filterTenant: function(category) {
 			var grid = document.getElementById('tenantGrid');
