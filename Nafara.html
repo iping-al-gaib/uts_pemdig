@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Kue Nafara - Premium Brownies & Cakes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-brown: #8B4513;
+            --light-brown: #D2691E;
+            --pastel-orange: #FFB68A;
+            --pastel-cream: #FFF5E6;
+            --gold: #FFD700;
+            --gold-dark: #B8860B;
+            --white: #FFFFFF;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--white) 0%, var(--pastel-cream) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-brown), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold-dark);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-brown);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, var(--pastel-cream) 0%, var(--pastel-orange) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), var(--gold-dark));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(184, 134, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-brown);
+            border: 2px solid var(--primary-brown);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-brown);
+            color: var(--white);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 2rem;
+            height: 100%;
+        }
+
+        .showcase-item {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: scale(1.05);
+        }
+
+        .showcase-item::before {
+            content: '🍰';
+            font-size: 3rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        /* Tenant Directory */
+        .tenant-section {
+            background: var(--pastel-cream);
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-brown);
+            background: var(--white);
+            color: var(--primary-brown);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-brown);
+            color: var(--white);
+        }
+
+        .tenant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tenant-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .tenant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .tenant-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tenant-card h3 {
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .tenant-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Events & Promo */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .event-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--pastel-orange), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .promo-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gold);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-content h3 {
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+        }
+
+        .event-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .event-date {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, var(--pastel-cream) 0%, var(--white) 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: var(--primary-brown);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .about-image {
+            background: linear-gradient(45deg, var(--primary-brown), var(--light-brown));
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .opening-hours {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .opening-hours h4 {
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            padding: 0.3rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: var(--pastel-cream);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--primary-brown);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--pastel-cream);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            width: 40px;
+        }
+
+        .map-container {
+            margin-top: 2rem;
+            height: 300px;
+            background: var(--pastel-cream);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-brown) 0%, var(--light-brown) 100%);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .tenant-grid,
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+            text-decoration: none;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Rumah Kue Nafara</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tenant">Produk</a></li>
+                <li><a href="#promo">Promo</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Brownies Premium <span class="highlight">Terlezat</span> di Kota</h1>
+                <p>Nikmati kelezatan brownies dan kue artisan buatan tangan dengan bahan premium pilihan. Setiap gigitan adalah pengalaman tak terlupakan!</p>
+                <div class="btn-group">
+                    <a href="#tenant" class="btn btn-primary">🛍️ Kunjungi Toko Online</a>
+                    <a href="#promo" class="btn btn-secondary">🎉 Promo Terbaru</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <div class="product-showcase">
+                        <div class="showcase-item">Brownies Coklat</div>
+                        <div class="showcase-item">Brownies Keju</div>
+                        <div class="showcase-item">Brownies Oreo</div>
+                        <div class="showcase-item">Brownies Premium</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tenant Directory -->
+    <section class="tenant-section" id="tenant">
+        <div class="container">
+            <div class="section-title">
+                <h2>Katalog Produk Kami</h2>
+                <p>Pilihan brownies dan kue premium untuk setiap momen spesial</p>
+            </div>
+
+            <div class="filter-container">
+                <button class="filter-btn active" onclick="filterTenant('all')">Semua</button>
+                <button class="filter-btn" onclick="filterTenant('brownies')">Brownies</button>
+                <button class="filter-btn" onclick="filterTenant('cake')">Birthday Cake</button>
+                <button class="filter-btn" onclick="filterTenant('hampers')">Hampers</button>
+                <button class="filter-btn" onclick="filterTenant('custom')">Custom Order</button>
+            </div>
+
+            <div class="tenant-grid" id="tenantGrid">
+                <div class="tenant-card" data-category="brownies">
+                    <div class="tenant-icon">🍫</div>
+                    <h3>Brownies Original</h3>
+                    <p>Brownies klasik dengan coklat premium Belgium</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Rp 85.000</p>
+                </div>
+                <div class="tenant-card" data-category="brownies">
+                    <div class="tenant-icon">🧀</div>
+                    <h3>Brownies Cheese</h3>
+                    <p>Perpaduan sempurna brownies dan cream cheese</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Rp 95.000</p>
+                </div>
+                <div class="tenant-card" data-category="brownies">
+                    <div class="tenant-icon">🍪</div>
+                    <h3>Brownies Oreo</h3>
+                    <p>Brownies dengan topping oreo crumble</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Rp 90.000</p>
+                </div>
+                <div class="tenant-card" data-category="cake">
+                    <div class="tenant-icon">🎂</div>
+                    <h3>Birthday Cake Box</h3>
+                    <p>Kue ulang tahun dalam kemasan praktis</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Mulai Rp 150.000</p>
+                </div>
+                <div class="tenant-card" data-category="hampers">
+                    <div class="tenant-icon">🎁</div>
+                    <h3>Hampers Lebaran</h3>
+                    <p>Paket hampers eksklusif untuk hari raya</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Mulai Rp 250.000</p>
+                </div>
+                <div class="tenant-card" data-category="custom">
+                    <div class="tenant-icon">✨</div>
+                    <h3>Custom Design Cake</h3>
+                    <p>Kue dengan desain sesuai permintaan</p>
+                    <p style="color: var(--gold-dark); font-weight: bold;">Harga by Request</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events & Promo -->
+    <section id="promo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Event & Promo Spesial</h2>
+                <p>Jangan lewatkan penawaran menarik dari kami</p>
+            </div>
+
+            <div class="event-grid">
+                <div class="event-card">
+                    <div class="event-image">
+                        🎉
+                        <span class="promo-badge">HOT DEAL</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Flash Sale Akhir Bulan</h3>
+                        <p>Diskon 30% untuk semua varian brownies! Berlaku untuk pembelian minimal 2 box.</p>
+                        <p class="event-date">📅 25-31 September 2025</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        🎂
+                        <span class="promo-badge">SPECIAL</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Birthday Package</h3>
+                        <p>Paket ulang tahun lengkap dengan brownies cake dan dekorasi spesial. Free delivery!</p>
+                        <p class="event-date">📅 Setiap Hari</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-image">
+                        🎁
+                        <span class="promo-badge">NEW</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>Pre-Order Hampers</h3>
+                        <p>Terima pre-order hampers untuk acara spesial. Design eksklusif dan packaging premium.</p>
+                        <p class="event-date">📅 Order H-7 Sebelum Acara</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Rumah Kue Nafara</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Cita Rasa Premium, Harga Bersahabat</h3>
+                    <p>Rumah Kue Nafara hadir sebagai destinasi utama untuk brownies dan kue premium di kota. Dengan pengalaman lebih dari 5 tahun, kami berkomitmen menghadirkan produk berkualitas tinggi dengan bahan-bahan pilihan.</p>
+
+                    <p>Setiap produk kami dibuat dengan penuh cinta dan ketelitian, menggunakan coklat Belgium premium, butter imported, dan bahan-bahan berkualitas tinggi lainnya. Kami percaya bahwa setiap momen spesial layak dirayakan dengan kue yang istimewa.</p>
+
+                    <div class="features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>100% Halal</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Bahan Premium</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Made Fresh Daily</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓
